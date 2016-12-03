@@ -1,16 +1,43 @@
 (ns automata.core
-  (:require ))
+  (:require [dommy.core :as dommy :refer-macros [sel sel1]]))
 
 (enable-console-print!)
 
-(println "This text is printed from src/automata/core.cljs. Go ahead and edit it and see reloading in action.")
+;;;;;;;;
+;; Utils
+(defn random-binary
+  "Returns a random 0 or 1"
+  []
+  (rand-int 2))
 
-;; define your app data so that it doesn't get over-written on reload
+;;;;;;;;;;;;
+;; Constants
+(def width 80)
 
-(defonce app-state (atom {:text "Hello world!"}))
+;;;;;;;;;
+;; Set up
+(defn random-class-div
+  []
+  (let [el (dommy/create-element "div")
+        cl (if (= 0 (random-binary))
+             "inactive"
+             "active")]
+    (dommy/add-class! el cl)))
 
-(defn on-js-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+(defn expand-row
+  [row n]
+  (doseq [i (range n)]
+    (let [el (random-class-div)
+          div (sel1 ".row")]
+      (dommy/append! div el))))
+
+(expand-row (sel1 ".row") width)
+
+;;;;;;;;;;;;;;;;;;
+;; Do the automata
+
+;; duplicate the row
+
+;; process the row
+
+;; repeat
