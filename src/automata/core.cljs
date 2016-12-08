@@ -45,8 +45,26 @@
 ;;;;;;;;;;;;;;;;;;
 ;; Do the automata
 
-;; duplicate the row
+;; read the last row
+;; process above row
+;; build the next row
 
-;; process the row
+(comment
 
-;; repeat
+  To read the row is easy.
+  1. Select the row (last (sel :.row))
+  2. Get a vector of 1s and 0s (map #(into [] (cond (= (has-class "active" %)) 1 0)))
+
+  To process the row is tricky
+  1. Get the element
+  2. Get the neighboring elements
+  3. Put them into a vector like [a b c]
+  4. Match the rule patterns to get the activity of child
+  6. Put 1 or 0 into []
+  7. Build the next row
+
+  To build the next row
+  1. Build row div
+  2. Expand row div
+  3. Apply the correct class for that spot
+)
